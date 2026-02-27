@@ -1,13 +1,16 @@
 import streamlit as st
 import pickle
 import numpy as np
-
-# Load model
-model = pickle.load(open("Like.pkl", "rb"))
+import os
 
 st.title("Kraljic Category Prediction App")
-
 st.write("Enter Product Details:")
+
+# ✅ Safe model loading (for Streamlit Cloud)
+model_path = os.path.join(os.path.dirname(__file__), "Like.pkl")
+
+with open(model_path, "rb") as f:
+    model = pickle.load(f)
 
 # Input fields
 lead_time = st.number_input("Lead Time (Days)", min_value=0)
@@ -25,7 +28,6 @@ if st.button("Predict Category"):
     input_data = np.array([[lead_time, order_volume, cost,
                             supply_risk, profit_impact,
                             environmental_impact, single_source]])
-    
+
     prediction = model.predict(input_data)
-    
     st.success(f"Predicted Kraljic Category: {prediction[0]}")
