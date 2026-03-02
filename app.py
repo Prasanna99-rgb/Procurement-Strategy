@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 import os
 
-st.title("Kraljic Category Prediction App")
+st.title("Kraljic Category Prediction App By Prasanna")
 st.write("Enter Product Details:")
 
 # ✅ Safe model loading (for Streamlit Cloud)
@@ -31,3 +31,4 @@ if st.button("Predict Category"):
 
     prediction = model.predict(input_data)
     st.success(f"Predicted Kraljic Category: {prediction[0]}")
+
